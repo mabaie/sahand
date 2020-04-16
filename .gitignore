@@ -1,0 +1,14 @@
+yarn*
+node_modules
+*.code-workspace
+.env
+.vscode
+dist
+configs/*
+routes/index.js
+sahand-web/public/*
+sahand-web/src/configs/index.js
+webpack.config.js
+*.pem
+*.crt
+*.key

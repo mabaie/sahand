@@ -1,0 +1,18 @@
+'use strict';
+const adminAuthorization = require('../../../../services/authorizators/admin');
+const authorization = require('../../../../middlewares/authorization');
+const appValidator = require('../../../../middlewares/appValidator');
+const updateManagerValidator = require('../../../../validators/updateManager');
+const updateManagerErrorHandler = require('../../../../controllers/Error/updateManager');
+const updateManagerController = require('../../../../controllers/update/manager');
+const deleteManagerController = require('../../../../controllers/delete/manager');
+const deleteManagerValidator = require('../../../../validators/deleteManager');
+const deleteManagerErrorHandleer = require('../../../../controllers/Error/deleteManager');
+const managerInfoController = require('../../../../controllers/get/managerInfo');
+const managersValidator = require('../../../../validators/managers.js');
+const managersErrorHandler = require('../../../../controllers/Error/managers');
+const router = require('express').Router();
+router.post('/managers', authorization(adminAuthorization), appValidator(managersValidator, managersErrorHandler), managerInfoController);
+router.patch('/manager/:id', authorization(adminAuthorization), appValidator(updateManagerValidator, updateManagerErrorHandler), updateManagerController);
+router.delete('/manager', authorization(adminAuthorization), appValidator(deleteManagerValidator, deleteManagerErrorHandleer), deleteManagerController);
+module.exports = router;

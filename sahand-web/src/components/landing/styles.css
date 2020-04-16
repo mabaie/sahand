@@ -1,0 +1,30 @@
+.App {
+  font-family: "IRANSans";
+  text-align: center;
+  background: white;
+}
+
+/*image container*/
+.App .container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+/* Centered text */
+.App .centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10em;
+}
+.App h1 {
+  font-size: 10em;
+}
+.App h2 {
+  font-size: 7em;
+}
+.App p {
+  font-size: 5em;
+}

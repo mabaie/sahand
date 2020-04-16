@@ -1,0 +1,27 @@
+'use strict';
+const router = require('express').Router();
+const authorization = require('../../../../middlewares/authorization');
+const allAuthorization = require('../../../../services/authorizators/user');
+const appValidator = require('../../../../middlewares/appValidator');
+const getChatListValidator = require('../../../../validators/getChats');
+const getChatListErrorHandler = require('../../../../controllers/Error/getChats');
+const getContactListValidator = require('../../../../validators/getContactList');
+const getContactListErrorHandler = require('../../../../controllers/Error/getContactList');
+const getChatsController = require('../../../../controllers/get/chats');
+const sendMessageValidator = require('../../../../validators/sendMessage');
+const sendMessageErrorHandler = require('../../../../controllers/Error/sendMessage');
+const sendMessageController = require('../../../../controllers/add/message');
+const idValidator = require('../../../../middlewares/mongoIdValidator');
+const managerAuthoritator = require('../../../../services/authorizators/manager');
+const deleteMessageValidator = require('../../../../validators/deleteMessage');
+const deleteMessageErrorHandler = require('../../../../controllers/Error/deleteMessage');
+const deleteMessageController = require('../../../../controllers/delete/message');
+const getChatController = require('../../../../controllers/get/chat');
+const getContactListController = require('../../../../controllers/get/contactList');
+
+router.post('/chat-list', authorization(allAuthorization), appValidator(getChatListValidator, getChatListErrorHandler), getChatsController);
+router.post('/chat-send-message', authorization(allAuthorization), appValidator(sendMessageValidator, sendMessageErrorHandler), sendMessageController);
+router.delete('/chat-message-remove/:id', idValidator, authorization(managerAuthoritator), appValidator(deleteMessageValidator, deleteMessageErrorHandler), deleteMessageController);
+router.post('/chat-view/:id', idValidator, authorization(allAuthorization),appValidator(getChatListValidator, getChatListErrorHandler), getChatController);
+router.post('/chat-contact-list', authorization(managerAuthoritator), appValidator(getContactListValidator, getContactListErrorHandler), getContactListController);
+module.exports = router;
